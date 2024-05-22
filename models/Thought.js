@@ -1,12 +1,12 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const {format } = require('date-fns');
 // Schema for reactions model
 
 const reactionSchema = new Schema(
     {
         reactionId:{
-            type: mongoose.Schema.Types.ObjectId,
-            default: mongoose.Types.ObjectId
+            type: Schema.Types.ObjectId,
+            default: Types.ObjectId
         },
         reactionBody:{
             type: String,
@@ -19,7 +19,7 @@ const reactionSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: date.now
+            default: Date.now
         }
     });
 // virtual reactionCount (retrieves the length of the thought's reactions array field on query)
@@ -43,7 +43,7 @@ const thoughtSchema = new Schema(
         default: Date.now
      },
      username: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
      },
@@ -60,6 +60,6 @@ thoughtSchema.virtual('reactionCount').get(function() {
 });
 
 // Create Thought Model
-const Thought = mongoose.model('Thought', thoughtSchema);
+const Thought = model('Thought', thoughtSchema);
 
 module.exports = Thought;
