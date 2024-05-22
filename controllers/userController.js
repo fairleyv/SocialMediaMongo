@@ -27,7 +27,7 @@ module.exports = {
         try{
             const user = await User.findOne({_id: req.params.userId})
             .populate('thoughts')
-            .populate('friends')
+                .populate({ path: 'friends', select: '-__v' }, )
 
             if (!user) {
                 return res.status(404).json({message: 'No user with this Id'});
@@ -49,7 +49,7 @@ module.exports = {
             );
 
             if (!user) {
-                return res.status(404).json({message: 'No user with this Id'})
+                return res.status(404).json({message: 'No user with this Id'});
             }
             res.json(user);
         } catch (err) {
@@ -85,14 +85,14 @@ module.exports = {
     // to add a new friend to a user's friend list
     async addFriend (req, res) {
         try {
-            const friend = await User.findOne({_id: req.params.friendsId});
+            const friend = await User.findOne({_id: req.params.friendId});
 
             if (!friend) {
                 return res.status(404).json({message: 'No friend user with this Id'});
             }
             const user = await User.findOneAndUpdate(
                 {_id: req.params.userId},
-                {$addToSet: {friends: req.params.friendsId}},
+                {$addToSet: {friends: req.params.friendId}},
                 {runValidators: true, new: true}
             )
 
@@ -110,7 +110,7 @@ module.exports = {
         try {
             const user = await User.findOneAndUpdate(
                 { _id: req.params.userId },
-                { $pull: { friends: req.params.friendsId } },
+                { $pull: { friends: req.params.friendId } },
                 { runValidators: true, new: true }
             )
     

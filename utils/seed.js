@@ -16,7 +16,7 @@ connection.once('open', async() => {
     
             // Create users
             const users = await User.create(
-                Array.from({ length: 12 }, () => ({
+                Array.from({ length: 6 }, () => ({
                     username: faker.internet.userName(),
                     email: faker.internet.email(),
                 }))
@@ -26,7 +26,7 @@ connection.once('open', async() => {
             await Promise.all(
                 users.map(async (user) => {
                     const thoughts = await Thought.create(
-                        Array.from({ length: 30 }, () => ({
+                        Array.from({ length: 4 }, () => ({
                             thoughtText: faker.lorem.sentence(),
                             username: user._id,
                         }))
@@ -42,7 +42,7 @@ connection.once('open', async() => {
             await Promise.all(
                 users.map(async (user) => {
                     // Choose random users as friends (excluding the current user)
-                    const friendsCount = Math.floor(Math.random() * 5) + 1; // Random number of friends between 1 and 5
+                    const friendsCount = Math.floor(Math.random() * 3) + 1; // Random number of friends between 1 and 5
                     const friends = users
                         .filter((u) => u._id.toString() !== user._id.toString())
                         .sort(() => 0.5 - Math.random())

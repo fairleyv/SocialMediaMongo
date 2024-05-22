@@ -13,20 +13,20 @@ module.exports = {
     },
 
     // post to create a new thought(don't forget to push the created thought's _id to the associated user's thoughts array fields)
-    async createThought(res,req) {
-        try{
+    async createThought(req, res) {
+        try {
             const thought = await Thought.create(req.body);
-            res.json(thought);
             const user = await User.findOneAndUpdate(
-                {username: req.body.username},
+                {_id: req.body.username},
                 {$addToSet: {thoughts: thought._id}},
                 {new: true}
         );
         if (!user) {
             return res.status(404).json({message: 'No user with that ID found'});
         }
+        res.json(thought);
         } catch (err) {
-            res.status(500).json(err)
+            res.status(500).json(err);
         }
     },
 
@@ -45,13 +45,13 @@ module.exports = {
     },
     
     // put to update a thought by its _id
-    async updateThought(res, req) {
+    async updateThought(req, res) {
         try {
             const thought = await Thought.findOneAndUpdate(
-                {_id: req.params.thoughtId},
+                { _id: req.params.thoughtId },
                 {$set: req.body},
                 {runValidators: true, new: true}
-            );
+            ); 
 
             if (!thought) {
                 return res.status(404).json({message: 'No thought with this Id'});

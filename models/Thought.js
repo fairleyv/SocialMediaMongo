@@ -6,7 +6,7 @@ const reactionSchema = new Schema(
     {
         reactionId:{
             type: Schema.Types.ObjectId,
-            default: Types.ObjectId
+            default: () => new Types.ObjectId()
         },
         reactionBody:{
             type: String,
@@ -22,13 +22,9 @@ const reactionSchema = new Schema(
             default: Date.now
         }
     });
-// virtual reactionCount (retrieves the length of the thought's reactions array field on query)
-reactionSchema.virtual('formattedCreatedAt').get(function () {
-    return format(this.createdAt, 'MM/dd/yyyy');
-});
-
-// Schema to create thought model
-
+    
+    // Schema to create thought model
+    
 const thoughtSchema = new Schema(
     {
         // thoughtText (string, required, between 1 and 280 characters)
@@ -55,6 +51,7 @@ thoughtSchema.virtual('formattedCreatedAt').get(function() {
     return format(this.createdAt, 'MM/dd/yyyy');
 });
 
+// virtual reactionCount (retrieves the length of the thought's reactions array field on query)
 thoughtSchema.virtual('reactionCount').get(function() {
     return this.reactions.length;
 });
