@@ -1,5 +1,5 @@
 const {User, Thought} = require ('../models')
-// api/user
+// api/users
 // get all users
 module.exports = {
     async getUsers(req, res) {
@@ -10,8 +10,19 @@ module.exports = {
             res.status(500).json(err);
         }
     },
+    // post a new user
+    async createUser(req,res) {
+        try {
+            const dbUserData = await User.create(req.body);
+            res.json(dbUserData);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    },
     
+    // api/user/:userId
     // get a single user by its _id (Populated thought and friend data)
+    
     async getSingleUser(req, res) {
         try{
             const user = await User.findOne({_id: req.params.userId})
@@ -23,15 +34,6 @@ module.exports = {
             }
 
             res.json(user);
-        } catch (err) {
-            res.status(500).json(err);
-        }
-    },
-    // post a new user
-    async createUser(req,res) {
-        try {
-            const dbUserData = await User.create(req.body);
-            res.json(dbUserData);
         } catch (err) {
             res.status(500).json(err);
         }
