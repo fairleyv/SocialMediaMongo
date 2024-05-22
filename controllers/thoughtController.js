@@ -1,7 +1,7 @@
 const { User, Thought } = require('../models')
 
 module.exports = {
-    // api/thought
+    // api/thoughts
     // get to get all thoughts
     async getThoughts(req, res) {
         try {
@@ -30,7 +30,7 @@ module.exports = {
         }
     },
 
-    // api/thought/:thoughtId
+    // api/thoughts/:thoughtId
     // get to get single thought by its _id
     async getSingleThought(req, res) {
         try {
@@ -87,7 +87,7 @@ module.exports = {
         }
     },
     
-    // api/thought/:thoughtId/reaction
+    // api/thoughts/:thoughtId/reactions
     // post to create a reaction stored in a single thought's reactions array field
     async createReaction (req,res) {
         try {
@@ -106,7 +106,7 @@ module.exports = {
             res.status(500).json(err);
         }
     },
-    // api/thought/:thoughtId/reaction/:reactionId
+    // api/thoughts/:thoughtId/reactions/:reactionId
 
     // delete to pull and remove a reaction by the reaction's reactionId value
     async deleteReaction(req,res) {

@@ -81,6 +81,27 @@ module.exports = {
     
     // api/users/:userId/friends/:friendsId
     // to add a new friend to a user's friend list
-    
+    async addFriend (req, res) {
+        try {
+            const friend = await User.findOne({_id: req.params.friendsId});
+
+            if (!friend) {
+                return res.status(404).json({message: 'No friend user with this Id'});
+            }
+            const user = await User.findOneAndUpdate(
+                {_id: req.params.userId},
+                {$addToSet: {friends: req.params.friendsId}},
+                {runValidators: true, new: true}
+            )
+
+            if (!user) {
+                return res.status(404).json({message: 'No user with this Id'});
+            }
+            
+            res.json({message: 'User added to friends list'});
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    }
     // to remove a friend from a user's friend list
 };
