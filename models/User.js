@@ -1,4 +1,4 @@
-const { Schema, model} = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 // Schema to create user model
 
@@ -24,12 +24,12 @@ const userSchema = new Schema({
     },
     // thoughts (array of _id values referencing the thought model)
     thoughts: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Thought'
     }],
     // array of _id values referncing the user model (self-reference)
     friends: [{
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User'
     }]
 });
@@ -39,6 +39,6 @@ userSchema.virtual('friendCount').get(function(){
 });
 
 //  Create User Model
-const User = mongoose.model('User', userSchema);
+const User = model('User', userSchema);
 
 module.exports = User;
