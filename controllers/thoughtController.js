@@ -50,11 +50,11 @@ module.exports = {
             const thought = await Thought.findOneAndUpdate(
                 {_id: req.params.thoughtId},
                 {$set: req.body},
-                {runValidatore: true, new: true}
+                {runValidators: true, new: true}
             );
 
             if (!thought) {
-                res.status(404).json({message: 'No thought with this id'});
+                return res.status(404).json({message: 'No thought with this Id'});
             }
 
             res.json(thought);
@@ -69,7 +69,7 @@ module.exports = {
             const thought = await Thought.findOneAndDelete({_id: req.params.thoughtId});
 
             if (!thought) {
-                res.status(404).json({message: 'No thought with that ID'})
+                return res.status(404).json({message: 'No thought with that ID'})
             }
 
             const user = await User.findOneAndUpdate(
@@ -82,7 +82,6 @@ module.exports = {
             }
 
             res.json({message: 'Thought successfully deleted'})
-            res.json({message: 'Thought deleted'})
         } catch (err) {
             res.status(500).json(err);
         }
