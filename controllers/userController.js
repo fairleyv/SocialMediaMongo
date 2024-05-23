@@ -70,11 +70,11 @@ module.exports = {
 
             const thoughts = await Thought.deleteMany({username: req.params.userId});
 
-            if (!thoughts) {
-                return res.json({message:'No thoughts to delete'});
-            }
+            // if (!thoughts) {
+            //     return res.json({message:'No thoughts to delete'});
+            // }
 
-            res.json({message: 'Thought(s) successfully deleted'});
+            // res.json({message: 'Thought(s) successfully deleted'});
 
         } catch (err) {
             res.status(500).json(err);
