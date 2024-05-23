@@ -32,11 +32,14 @@ Type npm i into the terminal in order to install all dependencies.
 First replace the connectionString value in the /config/connection.js file with the MongoDB URI that you want to use as your database. Afterwards you can run "npm run seed" in the terminal in order to populate your database with test data. Otherwise, you can type "npm run start" in the terminal in order to open the connection to your server. This will allow you to access the database using fetch requests.  
 
 ### User Routes being shown
-[UserRoutes.mp4.webm](https://github.com/fairleyv/SocialMediaMongo/assets/126346803/d65562eb-8a1c-4877-a2d9-8a7f4dce3907)
+https://github.com/fairleyv/SocialMediaMongo/assets/126346803/c3e136d9-3c0a-4365-8aad-f88fa238eb92
 
 
 ### Thought Routes Being Shown
-[ThoughtRoutes.mp4.webm](https://github.com/fairleyv/SocialMediaMongo/assets/126346803/729448aa-a100-4811-8702-5988f7f8f61a)
+
+https://github.com/fairleyv/SocialMediaMongo/assets/126346803/bdcd196b-f714-47ca-99bb-2f44b1a4ee5e
+
+
 
 
 ## Credits 
